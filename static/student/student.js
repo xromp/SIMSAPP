@@ -1,8 +1,6 @@
-define('sims.dashboard',[
+define('sims.student',[
   'angular',
-  'angular-route',
-  'require',
-  '/module-loader/requirejs-config.js'
+  'angular-route'
   ],function (angular) {
   'use strict';
     var app = angular.module('DashboardApp', ['ngRoute']);
@@ -48,16 +46,28 @@ define('sims.dashboard',[
             // }
         }
     ]);
+      $(document).ready(function() {
+        $('#wizard').smartWizard();
+
+        $('#wizard_verticle').smartWizard({
+          transitionEffect: 'slide'
+        });
+
+        $('.buttonNext').addClass('btn btn-success');
+        $('.buttonPrevious').addClass('btn btn-primary');
+        $('.buttonFinish').addClass('btn btn-default');
+      });
    return app;
 });
 requirejs(['/module-loader/requirejs-config.js'], function (){
   requirejs([
     'jquery',
     'angular',
-    'sims.dashboard',
+    'sims.student',
 
     'angular-route',
-    'custom'
+    'custom',
+    'jquery-smartwizard'
   ],function($,angular,app){
     $(function(){
       angular.bootstrap(document, [app.name]);

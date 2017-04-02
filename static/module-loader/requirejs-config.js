@@ -15,6 +15,10 @@ requirejs.config({
 
     // Plugins
     'icheck' :assetsUrl + '/iCheck/icheck.min',
+    'jquery-smartwizard': assetsUrl + '/jQuery-Smart-Wizard/js/jquery.smartWizard',
+
+    // lib
+    'fastclick': assetsUrl + '/fastclick/lib/fastclick',
 
     // customs
     'custom' :assetsUrl + '/custom/js/custom.min'
@@ -37,6 +41,11 @@ requirejs.config({
     },
     'angular-route':{
       deps:['angular']
+    },
+
+    // plugins
+    'jquery-smartwizard':{
+      deps:['jquery','bootstrap','fastclick']
     }
   }
 });
