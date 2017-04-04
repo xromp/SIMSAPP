@@ -1,9 +1,10 @@
+var app;
 define('sims.student',[
   'angular',
-  'angular-route'
-  ],function (angular) {
+  'module-loader/dependencyResolverFor.js'
+  ],function (angular, dependencyResolver) {
   'use strict';
-    var app = angular.module('DashboardApp', ['ngRoute']);
+    app = angular.module('StudentApp', ['ngRoute']);
     var baseUrl  ='http://localhost:5000/';
     app.config(
     [
@@ -16,22 +17,28 @@ define('sims.student',[
 
         function($routeProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, $provide)
         {
-          app.controller = $controllerProvider.register;
-          app.directive  = $compileProvider.directive;
-          app.filter     = $filterProvider.register;
-          app.factory    = $provide.factory;  
-          app.service    = $provide.service;
-
+          app.lazy = {
+            controller :$controllerProvider.register,
+            directive  :$compileProvider.directive,
+            filter     :$filterProvider.register,
+            factory    :$provide.factory,
+            service    :$provide.service
+          }
             // $locationProvider.html5Mode(true);
 
             $routeProvider
-            .when('/base',{
-              templateUrl: baseUrl + '/base/',
-              controller:'DashboardCtrl'
+            .when('/',{
+              templateUrl: baseUrl + 'student/student-create-wizard/template/student-create-wizard-tpl.html',
+              controller:'StudentCreateWizardCtrl',
+              resolve: dependencyResolver([
+                baseUrl + 'student/student-create-wizard/StudeCreateWizardApp.js'
+              ])
             })
             .otherwise({
-              // templateUrl: baseUrl + 'dashboard-tpl.html'
+              template:"<p>wrng!</p>",
+              controller:'DashboardCtrl'
             })
+
             // if(config.routes !== undefined)
             // {
             //     angular.forEach(config.routes, function(route, path)
@@ -46,17 +53,8 @@ define('sims.student',[
             // }
         }
     ]);
-      $(document).ready(function() {
-        $('#wizard').smartWizard();
-
-        $('#wizard_verticle').smartWizard({
-          transitionEffect: 'slide'
-        });
-
-        $('.buttonNext').addClass('btn btn-success');
-        $('.buttonPrevious').addClass('btn btn-primary');
-        $('.buttonFinish').addClass('btn btn-default');
-      });
+    app.controller('DashboardCtrl',['$scope','$routeParams', '$location', function ($scope, $routeParams, $location) {
+    }]);
    return app;
 });
 requirejs(['/module-loader/requirejs-config.js'], function (){
@@ -69,8 +67,6 @@ requirejs(['/module-loader/requirejs-config.js'], function (){
     'custom',
     'jquery-smartwizard'
   ],function($,angular,app){
-    $(function(){
-      angular.bootstrap(document, [app.name]);
-    });
+    angular.bootstrap(document, [app.name]);
   });
 });

@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, send_from_directory
 from jinja2 import Markup
 
 app= Flask(__name__,static_url_path='')
@@ -28,9 +28,18 @@ def enrollment():
 def student():
   return render_template('student/student-tpl.html')
 
+@app.route('/student/student-create-wizard/<path:path>')
+def send_js(path):
+    return app.send_static_file('student/student-create-wizard/'+path)
+
+@app.route('/student/student-create-wizard/template/<path:path>')
+def send_template(path):
+    return render_template('student/student-create-wizard/'+path)
+
 @app.errorhandler(404)
 def page_not_found(e):
   return render_template('exceptions/page_404.html'),404
+
 # @app.route("/dashboard")
 # def dasbboard():
 #   return render_template('dashboard-tpl.html')
