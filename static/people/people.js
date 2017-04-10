@@ -1,5 +1,5 @@
 var app;
-define('sims.student',[
+define('sims.people',[
   'angular',
   'module-loader/dependencyResolverFor.js'
   ],function (angular, dependencyResolver) {
@@ -27,11 +27,12 @@ define('sims.student',[
             $locationProvider.html5Mode(true);
 
             $routeProvider
-            .when('/student/student-create',{
-              templateUrl: 'student/student-create-wizard/student-create-wizard.html',
-              controller:'StudentCreateWizardCtrl',
+            .when('/people/create',{
+              templateUrl: 'people/people-create/people-create-tpl.html',
+              controller:'PeopleCreateCtrl',
+              controllerAs:'p',
               resolve: dependencyResolver([
-                baseUrl + 'student/student-create-wizard/StudeCreateWizardApp.js'
+                baseUrl + 'people/people-create/PeopleCreateApp.js'
               ])
             })
             .otherwise({
@@ -53,20 +54,15 @@ define('sims.student',[
             // }
         }
     ]);
-    app.controller('DashboardCtrl',['$scope','$routeParams', '$location', function ($scope, $routeParams, $location) {
-    }]);
    return app;
 });
 requirejs(['/module-loader/requirejs-config.js'], function (){
   requirejs([
     'jquery',
     'angular',
-    'sims.student',
+    'sims.people',
 
-    'angular-route',
-    'jquery-smartwizard',
-    'switchery',
-    'custom'
+    'angular-route'
   ],function($,angular,app){
     angular.bootstrap(document, [app.name]);
   });

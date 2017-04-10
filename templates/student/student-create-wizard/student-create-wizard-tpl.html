@@ -1,3 +1,4 @@
+<input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /> F:
 <div class="page-title">
   <div class="title_left">
     <h3>Student<small></small></h3>
@@ -105,7 +106,6 @@
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                  <div>
                     <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /> F:
                     <input type="radio" class="flat" name="gender" id="genderF" value="F" />
                   </div>
@@ -163,22 +163,3 @@
     </div>
   </div>
 </div>
-<script src="{{ url_for('static', filename='assets/jquery/dist/jquery.min.js')}}"></script>
-<script data-main="module-loader/requirejs-config.js" src="{{ url_for('static', filename='assets/requirejs/require.js')}}"></script>
-<script type="text/javascript" src="{{url_for('static', filename='assets/jQuery-Smart-Wizard/js/jquery.smartWizard.js')}}"></script>
-     <link rel="stylesheet" href="{{ url_for('static', filename='assets/iCheck/icheck.min.js')}}">
-
-<!-- <script type="text/javascript" src="{{url_for('static', filename='student/student.js')}}"></script> -->
-  <script>
-    $(document).ready(function() {
-      $('#wizard').smartWizard();
-
-      $('#wizard_verticle').smartWizard({
-        transitionEffect: 'slide'
-      });
-
-      $('.buttonNext').addClass('btn btn-success');
-      $('.buttonPrevious').addClass('btn btn-primary');
-      $('.buttonFinish').addClass('btn btn-default');
-    });
-  </script>

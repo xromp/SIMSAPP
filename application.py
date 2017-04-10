@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, jsonify, request
 from jinja2 import Markup
 
 app= Flask(__name__,static_url_path='')
@@ -28,13 +28,26 @@ def enrollment():
 def student():
   return render_template('student/student-tpl.html')
 
-@app.route('/student/student-create-wizard/<path:path>')
-def send_js(path):
-    return app.send_static_file('student/student-create-wizard/'+path)
+@app.route("/student/student-create")
+def studentcreate():
+  return render_template('student/student-tpl.html')
 
-@app.route('/student/student-create-wizard/template/<path:path>')
-def send_template(path):
-    return render_template('student/student-create-wizard/'+path)
+@app.route("/people/create")
+def peoplecreate():
+  return render_template('people/people.html')
+
+@app.route("/api/people/create/person", methods = ['POST'])
+def api():
+  if request.method == 'POST':
+    data = request.json
+  return jsonify(
+    status = 'success',
+    data = {'data': data}
+    )
+
+# @app.route('/student/student-create-wizard/<path:path>')
+# def send_js(path):
+#     return app.send_static_file('student/student-create-wizard/'+path)
 
 @app.errorhandler(404)
 def page_not_found(e):
