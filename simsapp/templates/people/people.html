@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block title %}Hello world!{% endblock %}
+{% block body %}
+  {{ super() }}
+  <div ng-view></div>
+  <script type="text/ng-template" id="people/people-create/people-create-tpl.html">
+    {% include 'people/people-create/people-create-tpl.html'%}
+  </script>
+  <script type="text/ng-template" id="modal/modal-ok/modal-ok.html">
+    {% include 'modal/modal.html'%}
+  </script>
+  <script data-main="module-loader/requirejs-config.js" src="{{ url_for('static', filename='assets/requirejs/require.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='people/people.js')}}"></script>
+</script>
+{% endblock %}
