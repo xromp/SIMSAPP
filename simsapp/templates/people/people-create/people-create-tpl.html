@@ -16,10 +16,12 @@
 </div>
 <div class="clearfix"></div>
 <div class="row">
-  <div class="col-md-12 col-sm-12 col-xs-12" block-ui="myBlockUI">
+  <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>Create Person <small>This <strong>People Create</strong> feature should include student, faculty members and all employee's related to Student Management</small></h2>
+        <h2>Create Person 
+          <small>This <strong>People Create</strong> feature should include student, faculty members and all employee's related to Student Management</small>
+        </h2>
         <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
@@ -39,19 +41,21 @@
       </div>
       <div class="x_content">
         <br />
-        <form name="frmCreate" data-parsley-validate class="form-horizontal form-label-left" novalidate>
-          <div class="form-group">
+        <form name="p.frmCreate" class="form-horizontal form-label-left" novalidate>
+          <div class="form-group" ng-class="{'has-error': p.frmCreate.fname.$invalid && p.frmCreate.withError }">
             <label class="control-label col-md-3 col-sm-3 col-xs-12">First Name <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <input type="text" name="fname"  class="form-control col-md-7 col-xs-12" ng-model="p.personInfo.fname" required>
+              <span class="help-block" ng-show="p.frmCreate.fname.$invalid && p.frmCreate.withError">First name is required field.</span>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group" ng-class="{'has-error': p.frmCreate.lname.$invalid && p.frmCreate.withError }">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <input type="text" name="lname" class="form-control col-md-7 col-xs-12" ng-model="p.personInfo.lname" required>
+              <span class="help-block" ng-show="p.frmCreate.lname.$invalid && p.frmCreate.withError">Last name is required field.</span>
             </div>
           </div>
           <div class="form-group">
@@ -91,7 +95,7 @@
           <div class="form-group">
             <div class="pull-right">
               <button type="reset" class="btn btn-default" ng-click="p.reset()">Reset</button>
-              <button type="submit" class="btn btn-success" ng-click="p.submit(p.personInfo)">Submit</button>
+              <button type="submit" class="btn btn-success" ng-click="p.submit(p.personInfo)" ng-disabled="p.frmCreate.$invalid && p.frmCreate.withError">Submit</button>
               <button type="button" class="btn btn-default" ng-click="p.get(p.personInfo)">Search</button>
             </div>
           </div>

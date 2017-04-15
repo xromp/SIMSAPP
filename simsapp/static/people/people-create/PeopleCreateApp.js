@@ -19,52 +19,57 @@ define([
         };
 
         vm.submit = function (data) {
-          var dataCopy = angular.copy(data);
-          var formData = angular.toJson(dataCopy);
-          
-          PeopleSrvcs.save(formData)
-          .then (function (response) {
-            if (response.status == 201) {
-              var modalInstance = $uibModal.open({
-                controller:'ModalInstanceCtrl',
-                controllerAs: 'vm',
-                templateUrl:'modal/modal-ok/modal-ok.html',
-                resolve :{
-                  formData: function () {
-                    return {
-                      title: 'Create People',
-                      message: response.data.message
-                    };
-                  }
-                }
-              });
+          if (vm.frmCreate.$valid) {
+            vm.frmCreate.withError = false;
+            var dataCopy = angular.copy(data);
+            var formData = angular.toJson(dataCopy);
 
-              modalInstance.result.then(function (){
-                // triggered close
-                console.log("closed");
-              },function (){
-                // triggered dismiss
-                console.log("dismiss");
-              });
-            }
-          },function(){alert("Error occured!")});
+            var appBlockUI = blockUI.instances.get('blockUI');
+            appBlockUI.start();
+            PeopleSrvcs.save(formData)
+            .then (function (response) {
+              if (response.status == 201) {
+                var modalInstance = $uibModal.open({
+                  controller:'ModalInstanceCtrl',
+                  controllerAs: 'vm',
+                  templateUrl:'modal/modal-ok/modal-ok.html',
+                  resolve :{
+                    formData: function () {
+                      return {
+                        title: 'Create People',
+                        message: response.data.message
+                      };
+                    }
+                  }
+                });
+
+                modalInstance.result.then(function (){
+                  // triggered close
+                  console.log("closed");
+                },function (){
+                  // triggered dismiss
+                  console.log("dismiss");
+                });
+                vm.personInfo = {};
+              }
+              appBlockUI.stop();
+            },function(){alert("Error occured!");appBlockUI.stop();});
+          } else {
+            vm.frmCreate.withError = true;
+          }
         };
 
         vm.get = function (data) {
           var dataCopy = angular.copy(data)
           data.person00id = 1;
           var formData = angular.toJson(dataCopy);
-          // var myBlockUI = blockUI;
-          var myBlockUI = blockUI.instances.get("myBlockUI");
-          myBlockUI.start();
-          myBlockUI.message="asa";
+
           PeopleSrvcs.get(data)
           .then (function (response) {
             if (response.status == 200) {
             }
 
           },function(){ alert("Bad Request!")})
-          // myBlockUI.stop();
         };
 
         vm.reset = function () {
