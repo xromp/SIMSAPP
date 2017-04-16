@@ -38,6 +38,14 @@ define('sims.people',[
                 baseUrl + '/people/people-create/PeopleCreateApp.js'
               ])
             })
+            .when('/people/finder',{
+              templateUrl: 'people/people-finder/people-finder-tpl.html',
+              controller:'PeopleFinderCtrl',
+              controllerAs:'pf',
+              resolve: dependencyResolver([
+                baseUrl + '/people/people-finder/PeopleFinderApp.js'
+              ])
+            })
             .otherwise({
               template:"<p>wrng!</p>",
               controller:'DashboardCtrl'

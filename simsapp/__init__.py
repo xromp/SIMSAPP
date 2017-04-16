@@ -36,6 +36,7 @@ def studentcreate():
   return render_template('student/student-tpl.html')
 
 @app.route("/people/create")
+@app.route("/people/finder")
 def peoplecreate():
   return render_template('people/people.html')
 
