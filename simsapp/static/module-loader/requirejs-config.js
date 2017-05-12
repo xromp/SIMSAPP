@@ -9,6 +9,8 @@ requirejs.config({
     // 'angular':'http://localhost/sims/assets/angular/angular.min',
     'angular-route':assetsUrl + '/angular-route/angular-route.min',
     'angular-block-ui':assetsUrl + '/angular-block-ui/dist/angular-block-ui.min',
+    'angular-animate':assetsUrl + '/angular-animate/angular-animate.min',
+    'angular-sanitize':assetsUrl + '/angular-sanitize/angular-sanitize.min',
 
     // Bootstraps
     'bootstrap':assetsUrl + '/bootstrap/dist/js/bootstrap.min',
@@ -56,7 +58,12 @@ requirejs.config({
     'angular-block-ui':{
       deps:['angular']
     },
-
+    'angular-animate':{
+      deps:['angular']
+    },
+    'angular-sanitize':{
+      deps:['angular']
+    },
     // plugins
     'jquery-smartwizard':{
       deps:['jquery','bootstrap','fastclick']

@@ -50,15 +50,20 @@
             </tr>
           </thead>
           <tbody ng-repeat="person in pf.personData">
-            <tr  ng-click="pf.showPersonDetail(person)">
+            <tr ng-click="pf.showPersonDetail(person)" >
               <td>
-                <img class="img-rounded img-responsive" src="{{ url_for('static',filename='assets/images/img.jpg')}}" alt="" width="70" height="70">
-                <p ng-bind="person.name"></p>
+                <img class="img-rounded img-responsive pull-left" src="{{ url_for('static',filename='assets/images/img.jpg')}}" alt="" width="50" height="50">
+                <div class="col-md-6">
+                  <p  style="margin-bottom: 0px;" ng-bind="person.name"></p>
+                  <small  style="margin-bottom: 0px;" ng-bind="person.level +'-'+ person.section + ' ('+ person.course +')'"></small>
+                </div>
               </td>
               <td ng-bind="person.level + '-' + person.section"></td>
               <td ng-bind="person.representative"></td>
             </tr>
-            <tr showdetail person="person"></tr>
+            {% raw %}
+            <tr style="background-color: #f7f7f7;" showdetail person="person" showdetails="person.isshowdetails"></tr>
+            {% endraw %}
           </tbody>
         </table>
       </div>

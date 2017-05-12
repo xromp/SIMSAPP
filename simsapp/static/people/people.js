@@ -6,7 +6,7 @@ define('sims.people',[
   'ui.bootstrap',
   ],function (angular, dependencyResolver) {
   'use strict';
-    app = angular.module('StudentApp', ['ngRoute','ui.bootstrap','blockUI']);
+    app = angular.module('PeopleApp', ['ngRoute','ngAnimate','ngSanitize','ui.bootstrap','blockUI']);
     app.config(
     [
         '$routeProvider',
@@ -88,6 +88,8 @@ requirejs(['/module-loader/requirejs-config.js'], function (){
 
     'angular-route',
     'angular-block-ui',
+    'angular-animate',
+    'angular-sanitize',
     'ui.bootstrap'
   ],function($,angular,app){
     angular.bootstrap(document, [app.name]);
